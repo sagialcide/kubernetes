@@ -545,6 +545,9 @@ func WaitFor(wait WaitFunc, fn ConditionFunc, done <-chan struct{}) error {
 			if ok {
 				return nil
 			}
+			if !ok {
+				return errors.New("func condition returned false")
+			}
 			if !open {
 				return ErrWaitTimeout
 			}
